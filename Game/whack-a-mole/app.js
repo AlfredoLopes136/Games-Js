@@ -1,47 +1,49 @@
 const square = document.querySelectorAll('.square')
-const mole = document.queruSelectorAll('.mole')
+const mole = document.querySelectorAll('.mole')
 const timeLeft = document.querySelector('#time-left')
 let score = document.querySelector('#score')
 
 let result = 0
 let currentTime = timeLeft.textContent
 
-function ramdomSquare() {
-    square.forEach(className => {
-        className.classList.remove('move')
-    })
-    let ramdomPosition = square[Math.floor(Math.random() * 9)]
-    ramdomPosition.classList.add('mole')
+function randomSquare() {
+  square.forEach(className => {
+    className.classList.remove('mole')
+  })
+  let randomPosition = square[Math.floor(Math.random() * 9)]
+  randomPosition.classList.add('mole')
 
-    // assingn the id of the ramdomPosition to hitPosition for us to use later
-    hitPosition = ramdomPosition.id
+  //assign the id of the randomPosition to hitPosition for us to use later
+  hitPosition = randomPosition.id
 }
 
 square.forEach(id => {
-    id.addEventListener('mouseup', () => {
-        if (id.id === hitPosition) {
-            result = result + 1
-            score.textContent = result
-            hitPosition = null
-        }
-    })
+  id.addEventListener('mouseup', () => {
+    if (id.id === hitPosition) {
+      result = result + 1
+      score.textContent = result
+      hitPosition = null
+    }
+  })
 })
 
+
 function moveMole() {
-    let timerId = null
-    timerId = setInterval(ramdomSquare, 500)
+  let timerId = null
+  timerId = setInterval(randomSquare, 500)
 }
 
 moveMole()
 
-function countDown() {
-    currentTime--
-    timeLeft.textContent = currentTime
 
-    if (currentTime === 0) {
-        clearInterval(timerId)
-        alert('GAME OVER! You final score is' + result)
-    }
+function countDown() {
+  currentTime--
+  timeLeft.textContent = currentTime
+
+  if (currentTime === 0) {
+    clearInterval(timerId)
+    alert('GAME OVER! Your final score is' + result)
+  }
 }
 
-let timeId = setInterval(countDown, 1000)
+let timerId = setInterval(countDown, 1000)
